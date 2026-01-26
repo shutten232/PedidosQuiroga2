@@ -1,0 +1,162 @@
+categoria,code,nombre,precio,img
+MANGUERAS,,MANGUERA AGUA DIAM 8 MM,2800,img/products/manguera-agua-diam-8-mm.jpg
+MANGUERAS,,MANGUERA NAFTA DIAM 6 MM,2500,img/products/manguera-nafta-diam-6-mm.jpg
+MANGUERAS,,MANGUERA GAS 5TA 11 MM,4700,img/products/manguera-gas-5ta-11-mm.jpg
+MANGUERAS,,MANGUERA GAS 12 MM,0,img/products/manguera-gas-12-mm.jpg
+MANGUERAS,,MANGUERA GAS 5 MM,2500,img/products/manguera-gas-5-mm.jpg
+MANGUERAS,,MALLADA IGNIFUGA DIAM. 17 MM,6000,img/products/mallada-ignifuga-diam-17-mm.jpg
+MANGUERAS,,GOMA AMORTIGUACION,2000,img/products/goma-amortiguacion.jpg
+MANGUERAS,,FUNDA PARA ZUNCHO,2000,img/products/funda-para-zuncho.jpg
+MANGUERAS,,VACIO 4X8 MM,2000,img/products/vacio-4x8-mm.jpg
+ACCESORIOS,,ABRAZADERAS 16-27 MANGUERA IGNIFUGA,750,img/products/abrazaderas-16-27-manguera-ignifuga.jpg
+ACCESORIOS,,ABRAZADERAS 8-16 MANGUERA NAFTA - AGUA,700,img/products/abrazaderas-8-16-manguera-nafta-agua.jpg
+ACCESORIOS,,ABRAZADERAS 8-12 MANGUERA INY. RAMPA,700,img/products/abrazaderas-8-12-manguera-iny-rampa.jpg
+ACCESORIOS,,ABRAZADERAS 12-22 MANGUERA GAS PP,750,img/products/abrazaderas-12-22-manguera-gas-pp.jpg
+ACCESORIOS,,ABRAZADERAS 23-35 CAÑO RETRACTIL VENTEO,750,img/products/abrazaderas-23-35-cano-retractil-venteo.jpg
+ACCESORIOS,,ABRAZADERAS 30-45 CAÑO CORRUGADO,750,img/products/abrazaderas-30-45-cano-corrugado.jpg
+ACCESORIOS,,ARANDELA P/ MANOMETRO,100,img/products/arandela-p-manometro.jpg
+ACCESORIOS,,CAÑO BUNDY,11000,img/products/cano-bundy.jpg
+ACCESORIOS,,PICOS INYECTOR 10/12/14 MM,4500,img/products/picos-inyector-10-12-14-mm.jpg
+ACCESORIOS,,REGISTRO DE ALTA 17 X 17 -REG ALTA-TEE REG,2500,img/products/Registro-De-Alta.jpg
+ACCESORIOS,,MEZCLADORES TECNO ALUMINIO,42000,img/products/mezcladores-tecno-aluminio.jpg
+ACCESORIOS,,BOLSA DE VENTEO DOBLE,1500,img/products/bolsa-de-venteo-doble.jpg
+ACCESORIOS,,PRECINTOS 19 MM X100,6500,img/products/precintos-19-mm-x100.jpg
+ACCESORIOS,,TEE DE MANOMETRO,4000,img/products/tee-de-manometro.jpg
+ACCESORIOS,,GRAMPA CAÑO BUNDY,100,img/products/grampa-cano-bundy.jpg
+ACCESORIOS,,CODO DE AGUA REG,700,img/products/codo-de-agua-reg.jpg
+ACCESORIOS,,TEE PASO AGUA 17 X 17 X 8,2200,img/products/tee-paso-agua-17-x-17-x-8.jpg
+ACCESORIOS,,HONGO DE VENTEO,500,img/products/hongo-de-venteo.jpg
+ACCESORIOS,,NIPLE LARGO,1200,img/products/niple-largo.jpg
+ACCESORIOS,,NIPLE DE ALTA PRESION,900,img/products/niple-de-alta-presion.jpg
+ACCESORIOS,,TAPON ALTA PRESION,1200,img/products/tapon-alta-presion.jpg
+ACCESORIOS,,SOPORTE VALV. CARGA,1500,img/products/soporte-valv-carga.jpg
+ACCESORIOS,,VIROLAS,250,img/products/virolas.jpg
+VALVULAS,,TAPON PICO DE CARGA,6000,img/products/tapon-pico-de-carga.jpg
+VALVULAS,,VALVULA DE CARGA,39000,img/products/valvula-de-carga.jpg
+VALVULAS,,VALVULA DE CARGA EXTERNA,29000,img/products/valvula-de-carga-externa.jpg
+VALVULAS,,VALVULA DE CORTE ELECTRICO C/ DOBLE VENTEO,55000,img/products/valvula-de-corte-electrico-c-doble-venteo.jpg
+VALVULAS,,ELECTROVALVULA DE NAFTA,30000,img/products/electrovalvula-de-nafta.jpg
+VALVULAS,,PICO DE CARGA,15000,img/products/pico-de-carga.jpg
+VALVULAS,,VALVULA NO RETORNO TIPO LAPIZ,10000,img/products/valvula-no-retorno-tipo-lapiz.jpg
+CUNAS,,"ZUNCHO 1,20 M X UNIDAD",8500,img/products/zuncho-1-20-m-x-unidad.jpg
+CUNAS,,CUNAS 273 / 323,50000,img/products/cunas-273-323.jpg
+CUNAS,,CUNA KANGOO,85000,img/products/cuna-kangoo.jpg
+CUNAS,,CUNA VOYAGE,0,img/products/cuna-voyage.jpg
+CUNAS,,CUNA BAJO CHASIS - ECOSPORT NUEVA,0,img/products/cuna-bajo-chasis-ecosport-nueva.jpg
+CUNAS,,CUNA ECOSPORT 2015,0,img/products/cuna-ecosport-2015.jpg
+CUNAS,,CUNA PARTNER,0,img/products/cuna-partner.jpg
+CUNAS,,CUNA DUSTER C/SOPORTE,0,img/products/cuna-duster-c-soporte.jpg
+CUNAS,,CUNA SURAN (2X30 C/SOPORTE),0,img/products/cuna-suran-2x30-c-soporte.jpg
+CUNAS,,CUNA SURAN,0,img/products/cuna-suran.jpg
+CUNAS,,CUNA FIAT STRADA,85000,img/products/cuna-fiat-strada.jpg
+CUNAS,,CUNA F100,90000,img/products/cuna-f100.jpg
+CUNAS,,CUNA FIAT TORO,0,img/products/cuna-fiat-toro.jpg
+CUNAS,,CUNA ELEVADA FIAT,0,img/products/cuna-elevada-fiat.jpg
+CUNAS,,CUNA ELEVADA VW . CORSA,0,img/products/cuna-elevada-vw-corsa.jpg
+CUNAS,,"CUNA ""J""",0,img/products/cuna-j.jpg
+CUNAS,,CUNA 90X406 O 355 O 340,90000,img/products/cuna-90x406-o-355-o-340.jpg
+REPUESTOS 5º GENERACION,,RAMPA TESMON/SGV/AXXIS,50000,img/products/rampa-tesmon-sgv-axxis.jpg
+REPUESTOS 5º GENERACION,,FILTRO PP,6500,img/products/filtro-pp.jpg
+REPUESTOS 5º GENERACION,,ELECTRONICA AXXIS CH (COMPATIBLE MP48) C/RAMPA,220000,img/products/electronica-axxis-ch-compatible-mp48-c-rampa.jpg
+REPUESTOS 5º GENERACION,,CABLEADO MP48,90000,img/products/cableado-mp48.jpg
+REPUESTOS 5º GENERACION,,ELECTRONICA AEB MP48 ORIGINAL CON RAMPA,260000,img/products/electronica-aeb-mp48-original-con-rampa.jpg
+REPUESTOS 5º GENERACION,,SENSOR DE MAP,50000,img/products/sensor-de-map.jpg
+REPUESTOS 5º GENERACION,,SENSOR DE TEMPERATURA,6500,img/products/sensor-de-temperatura.jpg
+REPUESTOS 5º GENERACION,,TECLA 5TA,25000,img/products/tecla-5ta.jpg
+REPUESTOS 5º GENERACION,,ECU AEB MP48,135000,img/products/ecu-aeb-mp48.jpg
+REPUESTOS 5º GENERACION,,ECU XPRO MP48,110000,img/products/ecu-xpro-mp48.jpg
+REPUESTOS 5º GENERACION,,MANOMETRO AEB,35000,img/products/manometro-aeb.jpg
+REPUESTOS 5º GENERACION,,REDUCTOR TESMON - SGV O AXXIS 5 TA,95000,img/products/reductor-tesmon-sgv-o-axxis-5-ta.jpg
+REPUESTOS 5º GENERACION,,REDUCTOR TESMON - SGV O AXXIS 3 ERA,115000,img/products/reductor-tesmon-sgv-o-axxis-3-era.jpg
+REPUESTOS 5º GENERACION,,REDUCTOR TESMON POTENCIADO,120000,img/products/reductor-tesmon-potenciado.jpg
+DIAFRAGMAS,KIT8024,OYRSA/ DINAMOTOR DINA I AG. CHICO,3500,img/products/KIT8024.jpg
+DIAFRAGMAS,KIT8001,OYRSA AG. GRANDE,3500,img/products/KIT8001.jpg
+DIAFRAGMAS,KIT8015,OYRSA P.POSITIVA,3500,img/products/KIT8015.jpg
+DIAFRAGMAS,KIT8009,DINAMOTOR RE-2001/DINA II,3500,img/products/KIT8009.jpg
+DIAFRAGMAS,KIT8010,SALUSTRI GS-93,3500,img/products/KIT8010.jpg
+DIAFRAGMAS,KIT8018,SALUSTRI GS 2000,3500,img/products/KIT8018.jpg
+DIAFRAGMAS,KIT8007,T. ACHILLE PICCOLO,3500,img/products/KIT8007.jpg
+DIAFRAGMAS,KIT8011,T. ACHILLE/ BRC ST40,3500,img/products/KIT8011.jpg
+DIAFRAGMAS,KIT8025,T. ACHILLE P.POSITIVA,3500,img/products/KIT8025.jpg
+DIAFRAGMAS,KIT8004,PRESCON POCKET,3500,img/products/KIT8004.jpg
+DIAFRAGMAS,KIT8008,ANSI NUEVO ANSI,3500,img/products/KIT8008.jpg
+DIAFRAGMAS,KIT8012,OMVL R89,3500,img/products/KIT8012.jpg
+DIAFRAGMAS,KIT8013,TOM. LOVATO T. LOVATO,3500,img/products/KIT8013.jpg
+DIAFRAGMAS,KIT8002,ABYT/BUGATTI BI GAS,3500,img/products/KIT8002.jpg
+DIAFRAGMAS,KIT8003,PELMAG/LOVATO LOVATO,3500,img/products/KIT8003.jpg
+DIAFRAGMAS,TDA0053,PELMAG P.POSITIVA,3500,img/products/TDA0053.jpg
+DIAFRAGMAS,KIT8006,TESMON / AIR GNC ASPIRADO,3500,img/products/KIT8006.jpg
+DIAFRAGMAS,KIT8017,TESMON P.POSITIVA,3500,img/products/KIT8017.jpg
+DIAFRAGMAS,KIT8005,GN GRUP GN,3500,img/products/KIT8005.jpg
+DIAFRAGMAS,KIT8019,GN GRUP P. POSITIVA,3500,img/products/KIT8019.jpg
+DIAFRAGMAS,KIT8020,B&H P.POSITIVA,3500,img/products/KIT8020.jpg
+DIAFRAGMAS,KIT8014,ABYT P.POSITIVA,3500,img/products/KIT8014.jpg
+DIAFRAGMAS,KIT8015,OYRSA P.POSITIVA,3500,img/products/KIT8015.jpg
+DIAFRAGMAS,KIT8016,TECNOFABRICA P.POSITIVA,3500,img/products/KIT8016.jpg
+DIAFRAGMAS,KIT8021,EMERALD P.POSITIVA,3500,img/products/KIT8021.jpg
+DIAFRAGMAS,KIT8023,L.RENZO TN04 ASPIRADO,3500,img/products/KIT8023.jpg
+DIAFRAGMAS,KIT8022,L.RENZO TN1 ASPIRADO,3500,img/products/KIT8022.jpg
+DIAFRAGMAS,KIT8026,GAS PETRO ASPIRADO,3500,img/products/KIT8026.jpg
+DIAFRAGMAS,KIT8029,GAS PETRO P.POSITIVA,3500,img/products/KIT8029.jpg
+DIAFRAGMAS,KIT8027,LANDI ASPIRADO,3500,img/products/KIT8027.jpg
+CONMUTADORES,CN-2E,LLAVE CONMUTADORA CARBURADORA,40000,img/products/CN-2E.jpg
+CONMUTADORES,CN-2ID,LLAVE CONMUTADORA INYECCION,40000,img/products/CN-2ID.jpg
+ELECTRONICA,,CONMUTADOR INYECCION MINI C/SENSOR,25000,img/products/conmutador-inyeccion-mini-c-sensor.jpg
+ELECTRONICA,,MAZO CONMUTADOR,15000,img/products/mazo-conmutador.jpg
+ELECTRONICA,,MODULO CONMUTADOR CARBURADOR,25000,img/products/modulo-conmutador-carburador.jpg
+ELECTRONICA,,MODULO CONMUTADOR INYECCION,25000,img/products/modulo-conmutador-inyeccion.jpg
+ELECTRONICA,,EMULADOR LAMBDA MAX,28000,img/products/emulador-lambda-max.jpg
+ELECTRONICA,,EMULADOR MONOPUNTO EIE-MN,28000,img/products/emulador-monopunto-eie-mn.jpg
+ELECTRONICA,,EMULADOR MULTIPUNTO EIE-400 F,31000,img/products/emulador-multipunto-eie-400-f.jpg
+ELECTRONICA,,EMULADOR MULTIPUNTO EIE-400 H,31000,img/products/emulador-multipunto-eie-400-h.jpg
+ELECTRONICA,,EMULADOR MULTIPUNTO EIE-400 J,31000,img/products/emulador-multipunto-eie-400-j.jpg
+ELECTRONICA,,EMULADOR MULTIPUNTO EIE-400 S,31000,img/products/emulador-multipunto-eie-400-s.jpg
+ELECTRONICA,,EMULADOR MULTIPUNTO EIE-400 T,31000,img/products/emulador-multipunto-eie-400-t.jpg
+ELECTRONICA,,EMULADOR MULTIPUNTO EIE-400 V,31000,img/products/emulador-multipunto-eie-400-v.jpg
+ELECTRONICA,,EMULADOR MULTIPUNTO EIE-600,38000,img/products/emulador-multipunto-eie-600.jpg
+ELECTRONICA,,EMULADOR MULTIPUNTO EIE-600 J,38000,img/products/emulador-multipunto-eie-600-j.jpg
+ELECTRONICA,,EMULADOR MULTIPUNTO EIE-600 T,38000,img/products/emulador-multipunto-eie-600-t.jpg
+ELECTRONICA,,EMULADOR OBD CAN,70000,img/products/emulador-obd-can.jpg
+ELECTRONICA,,EMULADOR OBD MAX,70000,img/products/emulador-obd-max.jpg
+ELECTRONICA,,EMULADOR RESET COMBUS AXXIS,30000,img/products/emulador-reset-combus-axxis.jpg
+ELECTRONICA,,EMULADOR RESET COMBUS SGV PLUS,27000,img/products/emulador-reset-combus-sgv-plus.jpg
+ELECTRONICA,,MAZO EMULADOR MULTIPUNTO EIE-400,21000,img/products/mazo-emulador-multipunto-eie-400.jpg
+ELECTRONICA,,MANOMETRO DE NIVEL SCN-4,35000,img/products/manometro-de-nivel-scn-4.jpg
+ELECTRONICA,,ADAPTADOR A,14000,img/products/adaptador-a.jpg
+ELECTRONICA,,ADAPTADOR B,14000,img/products/adaptador-b.jpg
+ELECTRONICA,,ADAPTADOR C,14000,img/products/adaptador-c.jpg
+ELECTRONICA,,ADAPTADOR E,14000,img/products/adaptador-e.jpg
+ELECTRONICA,,ADAPTADOR F,14000,img/products/adaptador-f.jpg
+ELECTRONICA,,ADAPTADOR G,14000,img/products/adaptador-g.jpg
+ELECTRONICA,,ADAPTADOR H,14000,img/products/adaptador-h.jpg
+ELECTRONICA,,ADAPTADOR I,14000,img/products/adaptador-i.jpg
+ELECTRONICA,,ADAPTADOR X,14000,img/products/adaptador-x.jpg
+ELECTRONICA,,VARIADOR WS-20,53000,img/products/variador-ws-20.jpg
+ELECTRONICA,,VARIADOR WS-50,53000,img/products/variador-ws-50.jpg
+ELECTRONICA,,VARIADOR WS-510,53000,img/products/variador-ws-510.jpg
+ELECTRONICA,,VARIADOR WS-510 F,53000,img/products/variador-ws-510-f.jpg
+ELECTRONICA,,VARIADOR WS-510 R,53000,img/products/variador-ws-510-r.jpg
+ELECTRONICA,,VARIADOR WS-511,53000,img/products/variador-ws-511.jpg
+ELECTRONICA,,INTERFAZ BLUETOOTH,80000,img/products/interfaz-bluetooth.jpg
+ELECTRONICA,,INTERFAZ USB,80000,img/products/interfaz-usb.jpg
+ELECTRONICA,,SISTEMA INT CHIPMAX BLUE,63000,img/products/sistema-int-chipmax-blue.jpg
+ELECTRONICA,,SISTEMA INT CHIPMAX GREEN,63000,img/products/sistema-int-chipmax-green.jpg
+ELECTRONICA,,SISTEMA INTEGRADO LAMBDA X5,50000,img/products/sistema-integrado-lambda-x5.jpg
+ELECTRONICA,,KIT SGAS PLUS 148 4 CIL. S3 REG EM,0,img/products/kit-sgas-plus-148-4-cil-s3-reg-em.jpg
+ELECTRONICA,,KIT SGAS PLUS 148 4 CIL. S3 REG SGV02R-M,0,img/products/kit-sgas-plus-148-4-cil-s3-reg-sgv02r-m.jpg
+ELECTRONICA,,KIT SGAS PLUS 148 4 CIL. S3 REG TF,0,img/products/kit-sgas-plus-148-4-cil-s3-reg-tf.jpg
+ELECTRONICA,,KIT SGAS PLUS 148 6 CIL. REG SGV02R-M,0,img/products/kit-sgas-plus-148-6-cil-reg-sgv02r-m.jpg
+ELECTRONICA,,MINIKIT SGAS PLUS 148 6 CIL. REG EM,0,img/products/minikit-sgas-plus-148-6-cil-reg-em.jpg
+ELECTRONICA,,MINIKIT SGAS PLUS 148 8 CIL. REG EM,0,img/products/minikit-sgas-plus-148-8-cil-reg-em.jpg
+ELECTRONICA,,MINIKIT SGAS PLUS 148 8 CIL. REG SGV-02R,0,img/products/minikit-sgas-plus-148-8-cil-reg-sgv-02r.jpg
+ELECTRONICA,,SGAS PLUS 148 4 CIL. S3,0,img/products/sgas-plus-148-4-cil-s3.jpg
+ELECTRONICA,,SGAS PLUS 148 4 CIL. S3 C/RAM,0,img/products/sgas-plus-148-4-cil-s3-c-ram.jpg
+ELECTRONICA,,SGAS PLUS 148 6 CIL. C/RAM,0,img/products/sgas-plus-148-6-cil-c-ram.jpg
+ELECTRONICA,,SGAS PLUS 148 8 CIL.,0,img/products/sgas-plus-148-8-cil.jpg
+ELECTRONICA,,SGAS PLUS 148 8 CILINDROS C/RAM,0,img/products/sgas-plus-148-8-cilindros-c-ram.jpg
+ELECTRONICA,,SGAS PLUS 148 RED 4 CILINDROS C/RAM,0,img/products/sgas-plus-148-red-4-cilindros-c-ram.jpg
+ELECTRONICA,,SGAS PLUS RED48+ 4 CILINDROS C/RAM,0,img/products/sgas-plus-red48-4-cilindros-c-ram.jpg
+ELECTRONICA,,SGAS PLUS RED48+ C/RAM RG1ITA,0,img/products/sgas-plus-red48-c-ram-rg1ita.jpg
+ELECTRONICA,,REGULADOR SGV02R-M 5TA,100000,img/products/regulador-sgv02r-m-5ta.jpg
+ELECTRONICA,,RAMPA SGV,50000,img/products/rampa-sgv.jpg
+ELECTRONICA,,REDUCTOR 3ERA SGV,115000,img/products/reductor-3era-sgv.jpg

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QUIRGROUP · Pedidos</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0b0f14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">Q</div>
+        <div>
+          <div class="t">QUIRGROUP</div>
+          <div class="s">Pedidos</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="navbtn active" data-view="catalogo" id="navCatalogo">
+          <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Catálogo
+        </button>
+        <button class="navbtn" data-view="pedidos" id="navPedidos">
+          <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M7 7h10M7 12h10M7 17h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/></svg>
+          Mis Pedidos
+        </button>
+        <button class="navbtn" data-view="kits" id="navKits">
+          <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M6 6h12v12H6z" stroke="currentColor" stroke-width="2"/></svg>
+          Kits de Instalación
+        </button>
+      </nav>
+
+      <div class="spacer"></div>
+      <div class="sidefoot">
+        <span>Solo pedidos</span>
+        
+          <span id="adminTxt">Admin OFF</span>
+        </span>
+      </div>
+    </aside>
+
+    <header class="topbar">
+      <div class="topLeft">
+        <div class="hamb" id="btnMenu" title="Menú">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="topTitle">
+          <div class="a">QUIRGROUP</div>
+          <div class="b">pedidos · catálogo</div>
+        </div>
+      </div>
+
+      <div class="searchWrap" role="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M21 21l-4.3-4.3" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+          <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" stroke="#111827" stroke-width="2"/>
+        </svg>
+        <input id="q" placeholder="Buscar repuesto..." autocomplete="off" />
+      </div>
+
+      <div class="topRight">
+<span id="cloudTxt">Catálogo</span>
+        </span>
+<button class="iconBtn" id="btnInstall" title="Instalar app" style="display:none">Instalar</button>
+
+        <button class="iconBtn" id="btnCart" title="Carrito">
+          <span class="badgeCount" id="cartBadge">0</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M6 6h15l-1.5 9h-12L6 6Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M6 6l-2-3H2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm9 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" stroke="white" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+  <!-- Mobile FAB Cart -->
+  <button class="fabCart" id="fabCart" title="Carrito" aria-label="Carrito">
+    <span class="fabBadge" id="fabBadge">0</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M6 6h15l-1.5 9h-12L6 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M6 6l-2-3H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm9 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </button>
+
+
+    <main class="main">
+      <div class="banner">Pedidos</div>
+
+      
+      <div id="mobileSearchSlot"></div>
+<section class="contentCard" id="viewCatalogo">
+        <div class="contentHd">
+          <div>
+            <div class="title">Catálogo de Repuestos</div>
+            <div class="mini" id="meta">0 productos</div>
+          </div>
+          <div class="right">
+            <div class="mini">Filtro</div>
+            <select class="select" id="cat"><option value="">Todos</option></select>
+          </div>
+        </div>
+        <div class="grid" id="grid"></div>
+        <div class="helpInline" style="padding:0 14px 14px 14px">
+          Catálogo embebido en el HTML. En admin podés editar nombre/precio/categoría/imagen y publicar al cloud.
+        </div>
+      </section>
+
+      <section class="contentCard" id="viewPedidos" style="display:none">
+        <div class="contentHd">
+          <div>
+            <div class="title">Mis Pedidos</div>
+            <div class="mini" id="metaOrders">0 pedidos</div>
+          </div>
+          <div class="right">
+            <button class="btn" id="btnRepeatLast">Repetir último</button>
+            <button class="btn" id="btnClearOrders" style="border-color: rgba(239,68,68,.35); color:#991b1b;">Borrar historial</button>
+          </div>
+        </div>
+        <div class="orders" id="orders"></div>
+      </section>
+
+      <section class="contentCard" id="viewKits" style="display:none">
+        <div class="contentHd"><div><div class="title">Kits de Instalación</div><div class="mini">Pendiente</div></div></div>
+        <div class="empty">Se arma después. Primero catálogo + pedido.</div>
+      </section>
+    </main>
+  </div>
+
+  <div class="drawerBack" id="drawerBack"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawerHd"><div class="t">Carrito</div><button class="btn" id="btnCloseCart">Cerrar</button></div>
+    <div class="drawerBd" id="cartList"></div>
+    <div class="drawerFt">
+      <div class="total"><div>Total</div><div class="v" id="cartTotal">$ 0</div></div>
+      <div class="muted">Datos del pedido</div>
+      <input class="field" id="taller" placeholder="Nombre del taller (obligatorio)" />
+      <input class="field" id="obs" placeholder="Observaciones (opcional)" />
+      <div class="err" id="errTaller">Poné el nombre del taller.</div>
+      <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
+        <button class="btn" id="btnCopy">Copiar resumen</button>
+        <button class="btn primary" id="btnCheckout">Finalizar y enviar WhatsApp</button>
+      </div>
+      <div class="muted" style="margin-top:8px">Guarda pedido local + abre WhatsApp.</div>
+    </div>
+  </aside>
+
+  <div class="drawerBack" id="menuBack" style="z-index:70"></div>
+  <aside class="drawer" id="menuDrawer" style="z-index:75">
+    <div class="drawerHd"><div class="t">Menú</div><button class="btn" id="btnCloseMenu">Cerrar</button></div>
+    <div class="drawerBd">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn" id="mCatalogo" style="justify-content:flex-start">Catálogo</button>
+        <button class="btn" id="mPedidos" style="justify-content:flex-start">Mis pedidos</button>
+        <button class="btn" id="mKits" style="justify-content:flex-start">Kits</button>
+      </div>
+      <div style="height:12px"></div>
+      <div class="muted">En mobile el menú reemplaza la sidebar.</div>
+    </div>
+  </aside>
+
+  <div class="modalBack" id="modalBack">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+      <div class="mHd"><div class="t" id="mTitle">Detalle</div><button class="btn" id="mClose">Cerrar</button></div>
+      <div class="mBd" id="mBody"></div>
+    </div>
+  </div>
+
+  <script defer src="js/products.js"></script>
+  <script defer src="js/app.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
