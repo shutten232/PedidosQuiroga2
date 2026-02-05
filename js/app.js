@@ -162,7 +162,8 @@
   }
 
   function productCard(p) {
-    const inCart = cart[p.id]?.qty || 0;
+    // Cantidad a agregar desde el catálogo (no es la cantidad actual del carrito)
+    const qtyToAdd = 1;
     const imgSrc = resolveImg(p);
     const img = `<img src="${escapeHTML(imgSrc)}" alt="${escapeHTML(p.name)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='img/placeholder.svg'">`;
 
@@ -181,7 +182,7 @@
             <button class="btn primary" data-act="add">Agregar al Carrito</button>
             <div class="qty">
               <button class="qbtn" data-act="m">−</button>
-              <input class="qinput" type="number" inputmode="numeric" min="0" step="1" value="${inCart}" aria-label="Cantidad" />
+              <input class="qinput" type="number" inputmode="numeric" min="1" step="1" value="${qtyToAdd}" aria-label="Cantidad" />
               <button class="qbtn" data-act="p">+</button>
             </div>
           </div>
@@ -204,16 +205,35 @@
         const actEl = (e.target && e.target.closest) ? e.target.closest("[data-act]") : null;
         const act = actEl ? actEl.getAttribute("data-act") : null;
         if (!act) return;
-        if (act === "add" || act === "p") { addToCart(p, +1); return; }
-        if (act === "m") { addToCart(p, -1); return; }
+        const qinputEl = node.querySelector(".qinput");
+
+        // + / - ajustan la cantidad a agregar (no el carrito)
+        if (act === "p" || act === "m") {
+          if (!qinputEl) return;
+          const cur = Math.max(1, parseInt(qinputEl.value || "1", 10) || 1);
+          const next = act === "p" ? (cur + 1) : Math.max(1, cur - 1);
+          qinputEl.value = String(next);
+          return;
+        }
+
+        // Agregar al carrito usa la cantidad escrita
+        if (act === "add") {
+          const qty = Math.max(1, parseInt(qinputEl?.value || "1", 10) || 1);
+          addToCart(p, qty);
+          return;
+        }
       });
 
-      // Permite escribir cantidad
+      // Permite escribir cantidad (solo valida, no modifica carrito)
       const qinput = node.querySelector(".qinput");
       if (qinput) {
-        const apply = () => setQty(p.id, qinput.value);
-        qinput.addEventListener("change", apply);
-        qinput.addEventListener("blur", apply);
+        const sanitize = () => {
+          let v = parseInt(qinput.value || "1", 10);
+          if (isNaN(v) || v < 1) v = 1;
+          qinput.value = String(v);
+        };
+        qinput.addEventListener("input", sanitize);
+        qinput.addEventListener("blur", sanitize);
         qinput.addEventListener("keydown", (ev) => {
           if (ev.key === "Enter") { ev.preventDefault(); qinput.blur(); }
           if (["e","E","+","-"].includes(ev.key)) ev.preventDefault();
