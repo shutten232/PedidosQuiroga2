@@ -1,13 +1,13 @@
-const CACHE_NAME = "pedidos-gnc-local-v8";
+const CACHE_NAME = "pedidos-gnc-local-force-2026-02-05-2";
 const STATIC_ASSETS = [
   "./",
-  "./index.html",
-  "./manifest.json",
+  "./index.html?v=2026-02-05-2",
+  "./manifest.json?v=2026-02-05-2",
   "./icon-192.png",
   "./icon-512.png",
-  "./css/styles.css",
-  "./js/products.js",
-  "./js/app.js",
+  "./css/styles.css?v=2026-02-05-2",
+  "./js/products.js?v=2026-02-05-2",
+  "./js/app.js?v=2026-02-05-2",
   "./img/placeholder.svg",
   "./catalogo_fix_stock.csv"
 ];
@@ -48,7 +48,7 @@ self.addEventListener("fetch", (event) => {
         cache.put(req, res.clone());
         return res;
       } catch (e) {
-        const cached = await caches.match(req);
+        const cached = await caches.match(req, { ignoreSearch: true });
         return cached || caches.match("./index.html");
       }
     })());
@@ -57,7 +57,7 @@ self.addEventListener("fetch", (event) => {
 
   if (dest === "image") {
     event.respondWith((async () => {
-      const cached = await caches.match(req);
+      const cached = await caches.match(req, { ignoreSearch: true });
       if (cached) return cached;
       try {
         const res = await fetch(req);
