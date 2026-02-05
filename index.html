@@ -168,6 +168,7 @@
         <button class="btn" id="mCatalogo" style="justify-content:flex-start">Catálogo</button>
         <button class="btn" id="mPedidos" style="justify-content:flex-start">Mis pedidos</button>
         <button class="btn" id="mKits" style="justify-content:flex-start">Kits</button>
+        <button class="btn" id="btnResetCache" style="justify-content:flex-start">Reiniciar caché</button>
       </div>
       <div style="height:12px"></div>
       <div class="muted">En mobile el menú reemplaza la sidebar.</div>
@@ -185,9 +186,36 @@
   <script defer src="js/app.js"></script>
 
   <script>
+    // PWA auto-update: activa el nuevo Service Worker y recarga automáticamente
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {});
+      window.addEventListener("load", async () => {
+        try {
+          const reg = await navigator.serviceWorker.register("./sw.js", { scope: "./" });
+
+          // chequeo inmediato + periódico
+          reg.update();
+          setInterval(() => reg.update(), 30 * 60 * 1000);
+
+          // si aparece una actualización, forzar activación
+          reg.addEventListener("updatefound", () => {
+            const sw = reg.installing;
+            if (!sw) return;
+
+            sw.addEventListener("statechange", () => {
+              if (sw.state === "installed" && navigator.serviceWorker.controller) {
+                try { sw.postMessage({ type: "SKIP_WAITING" }); } catch {}
+              }
+            });
+          });
+
+          // cuando el nuevo SW toma control, recargar
+          let reloaded = false;
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (reloaded) return;
+            reloaded = true;
+            location.reload();
+          });
+        } catch {}
       });
     }
   </script>
