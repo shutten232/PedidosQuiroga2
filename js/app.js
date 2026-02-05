@@ -8,7 +8,7 @@
   "use strict";
 
   // ===== CONFIG =====
-  const WHATSAPP_DESTINO = ""; // opcional: 549351XXXXXXXX
+  const WHATSAPP_NUMBER = "5493515144679"; // FIXED – NO TOCAR
 
   // ===== STORAGE KEYS =====
   const LS_PRODUCTS_CACHE = "qg_products_cache_v2";
@@ -371,10 +371,8 @@
 
     const msg = buildOrderSummary(order);
     const encoded = encodeURIComponent(msg);
-    const phone = normalizePhone(WHATSAPP_DESTINO);
-    const url = phone ? `https://wa.me/${phone}?text=${encoded}` : `https://wa.me/?text=${encoded}`;
-
-    cart = {};
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+cart = {};
     saveCart(cart);
     closeCart();
     setView("pedidos");
