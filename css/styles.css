@@ -90,6 +90,10 @@
     .qbtn{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:1100;font-size:16px;color:#111827}
     .qbtn:hover{background:#f7f9fc}
     .qnum{min-width:34px;text-align:center;font-weight:1100;color:#111827}
+    .qinput{width:64px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;text-align:center;font-weight:1100;color:#111827;outline:none}
+    .qinput:focus{border-color:#1f2937;box-shadow:0 0 0 3px rgba(31,41,55,.12)}
+    .qinput::-webkit-outer-spin-button,.qinput::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .qinput[type=number]{-moz-appearance:textfield}}
 
     .drawerBack{position:fixed;inset:0;background:rgba(2,6,23,.35);display:none;z-index:50}
     .drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);background:#fff;border-left:1px solid var(--line);box-shadow:-18px 0 50px rgba(2,6,23,.20);transform:translateX(110%);transition:transform .22s ease;z-index:60;display:flex;flex-direction:column}

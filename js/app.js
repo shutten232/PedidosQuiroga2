@@ -22,6 +22,7 @@
     return "$ " + v.toLocaleString("es-AR", { maximumFractionDigits: 0 });
   };
   const norm = (s) => (s || "").toString().trim().toLowerCase();
+  const inStock = (p) => (Number(p?.price) || 0) > 0;
   const safeParse = (j, fb) => { try { return JSON.parse(j); } catch { return fb; } };
   const escapeHTML = (s) => (s || "").replace(/[&<>"']/g, (m) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
@@ -37,6 +38,21 @@
   const saveProductsCache = (arr) => localStorage.setItem(LS_PRODUCTS_CACHE, JSON.stringify(arr || []));
   const loadCart = () => safeParse(localStorage.getItem(LS_CART) || "{}", {});
   const saveCart = (c) => localStorage.setItem(LS_CART, JSON.stringify(c || {}));
+
+  const sanitizeCartAgainstStock = () => {
+    try {
+      let changed = false;
+      Object.keys(cart).forEach((id) => {
+        const p = products.find(x => String(x.id) === String(id));
+        if (!p || !inStock(p)) { delete cart[id]; changed = true; return; }
+        // ensure updated price/name
+        cart[id].price = Number(p.price) || 0;
+        cart[id].name = p.name || cart[id].name;
+        cart[id].code = p.code || cart[id].code;
+      });
+      if (changed) saveCart(cart);
+    } catch {}
+  };
   const loadOrders = () => safeParse(localStorage.getItem(LS_ORDERS) || "[]", []);
   const saveOrders = (o) => localStorage.setItem(LS_ORDERS, JSON.stringify(o || []));
 
@@ -97,6 +113,7 @@
     renderAll();
   }
   function addToCart(p, delta) {
+    if (!inStock(p)) return;
     const id = p.id;
     const prev = cart[id]?.qty || 0;
     const next = Math.max(0, prev + delta);
@@ -109,7 +126,7 @@
   // ===== FILTER/CATS =====
   function buildCategories() {
     const set = new Set();
-    products.forEach(p => { const c = (p.cat || "").trim(); if (c) set.add(c); });
+    products.filter(inStock).forEach(p => { const c = (p.cat || "").trim(); if (c) set.add(c); });
     return Array.from(set).sort((a, b) => a.localeCompare(b, "es"));
   }
   function renderCatSelect() {
@@ -121,7 +138,7 @@
   function filterProducts() {
     const qq = norm(q.value);
     const cc = (cat.value || "").trim();
-    let arr = products;
+    let arr = products.filter(inStock);
     if (cc) arr = arr.filter(p => (p.cat || "").trim() === cc);
     if (qq) {
       const terms = qq.split(/\s+/).filter(Boolean);
@@ -164,7 +181,7 @@
             <button class="btn primary" data-act="add">Agregar al Carrito</button>
             <div class="qty">
               <button class="qbtn" data-act="m">−</button>
-              <div class="qnum">${inCart}</div>
+              <input class="qinput" type="number" inputmode="numeric" min="0" step="1" value="${inCart}" aria-label="Cantidad" />
               <button class="qbtn" data-act="p">+</button>
             </div>
           </div>
@@ -175,7 +192,7 @@
 
   function renderCatalog() {
     const arr = filterProducts();
-    meta.textContent = `${products.length} productos · mostrando ${arr.length}`;
+    meta.textContent = `${products.filter(inStock).length} productos · mostrando ${arr.length}`;
     grid.innerHTML = arr.length ? arr.map(productCard).join("") : `<div class="empty">Sin resultados.</div>`;
 
     grid.querySelectorAll(".pCard").forEach(node => {
@@ -190,6 +207,18 @@
         if (act === "add" || act === "p") { addToCart(p, +1); return; }
         if (act === "m") { addToCart(p, -1); return; }
       });
+
+      // Permite escribir cantidad
+      const qinput = node.querySelector(".qinput");
+      if (qinput) {
+        const apply = () => setQty(p.id, qinput.value);
+        qinput.addEventListener("change", apply);
+        qinput.addEventListener("blur", apply);
+        qinput.addEventListener("keydown", (ev) => {
+          if (ev.key === "Enter") { ev.preventDefault(); qinput.blur(); }
+          if (["e","E","+","-"].includes(ev.key)) ev.preventDefault();
+        });
+      }
     });
   }
 
@@ -214,7 +243,7 @@
           </div>
           <div class="cCtrl">
             <button class="qbtn" data-act="m">−</button>
-            <div class="qnum">${it.qty}</div>
+            <input class="qinput" type="number" inputmode="numeric" min="0" step="1" value="${it.qty}" aria-label="Cantidad" data-act="set" />
             <button class="qbtn" data-act="p">+</button>
             <button class="cDel" data-act="d">X</button>
           </div>
@@ -227,11 +256,31 @@
       row.addEventListener("click", (e) => {
         const act = e.target?.getAttribute?.("data-act");
         if (!act) return;
+
+        // input cantidad
+        if (act === "set") {
+          const v = Number(e.target.value);
+          setQty(id, v);
+          return;
+        }
+
         const cur = cart[id]?.qty || 0;
         if (act === "p") setQty(id, cur + 1);
         if (act === "m") setQty(id, cur - 1);
         if (act === "d") setQty(id, 0);
       });
+
+      // Permite escribir cantidad (sin depender del click)
+      const qinput = row.querySelector(".qinput");
+      if (qinput) {
+        const apply = () => setQty(id, qinput.value);
+        qinput.addEventListener("change", apply);
+        qinput.addEventListener("blur", apply);
+        qinput.addEventListener("keydown", (ev) => {
+          if (ev.key === "Enter") { ev.preventDefault(); qinput.blur(); }
+          if (["e","E","+","-"].includes(ev.key)) ev.preventDefault();
+        });
+      }
     });
   }
 
@@ -457,12 +506,37 @@
     saveProductsCache(products);
   }
 
+  
+  // ===== CACHE RESET =====
+  async function resetAppCache() {
+    try { localStorage.clear(); } catch {}
+    try { sessionStorage.clear(); } catch {}
+
+    try {
+      if ("caches" in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+    } catch {}
+
+    try {
+      if ("serviceWorker" in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map(r => r.unregister()));
+      }
+    } catch {}
+
+    // Recarga dura
+    location.reload();
+  }
+
   function bindEvents() {
     document.getElementById("btnCart")?.addEventListener("click", openCart);
     document.getElementById("btnCloseCart")?.addEventListener("click", closeCart);
     drawerBack?.addEventListener("click", closeCart);
     document.getElementById("btnCheckout")?.addEventListener("click", checkoutWhatsapp);
     document.getElementById("btnCopy")?.addEventListener("click", copySummary);
+    document.getElementById("btnResetCache")?.addEventListener("click", resetAppCache);
 
     document.getElementById("btnClearOrders")?.addEventListener("click", () => {
       if (!confirm("Borrar historial de pedidos?")) return;
@@ -508,6 +582,7 @@
 
   function init() {
     initProducts();
+    sanitizeCartAgainstStock();
     setView("catalogo");
     renderAll();
     initMobileSearch();
