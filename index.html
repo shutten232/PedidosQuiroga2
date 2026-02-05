@@ -8,7 +8,6 @@
   <meta http-equiv="Expires" content="0" />
   <title>QUIRGROUP · Pedidos</title>
 
-  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0b0f14">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -185,40 +184,7 @@
   <script defer src="js/products.js?v=2026-02-05-2"></script>
   <script defer src="js/app.js?v=2026-02-05-2"></script>
 
-  <script>
-    // PWA auto-update: activa el nuevo Service Worker y recarga automáticamente
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", async () => {
-        try {
-          const reg = await navigator.serviceWorker.register("./sw.js", { scope: "./" });
-
-          // chequeo inmediato + periódico
-          reg.update();
-          setInterval(() => reg.update(), 30 * 60 * 1000);
-
-          // si aparece una actualización, forzar activación
-          reg.addEventListener("updatefound", () => {
-            const sw = reg.installing;
-            if (!sw) return;
-
-            sw.addEventListener("statechange", () => {
-              if (sw.state === "installed" && navigator.serviceWorker.controller) {
-                try { sw.postMessage({ type: "SKIP_WAITING" }); } catch {}
-              }
-            });
-          });
-
-          // cuando el nuevo SW toma control, recargar
-          let reloaded = false;
-          navigator.serviceWorker.addEventListener("controllerchange", () => {
-            if (reloaded) return;
-            reloaded = true;
-            location.reload();
-          });
-        } catch {}
-      });
-    }
-  </script>
+  
 
 <!-- build:2026-02-05-2 -->
 <script>console.log("QUIRGROUP Pedidos build 2026-02-05-2");</script>
