@@ -418,3 +418,45 @@
 }
 #btnInstall:hover{ filter: brightness(.98); }
 #btnInstall:active{ transform: translateY(1px); }
+
+
+/* =========================
+   KITS DE INSTALACIÓN (UI)
+   ========================= */
+.kitsBody{padding:14px}
+.kitsGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:start}
+@media (max-width:980px){.kitsGrid{grid-template-columns:1fr}}
+.kitsBox,.kitsSummary{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 18px rgba(2,6,23,.06);padding:12px}
+.kitsBoxTitle{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.kitsBoxH{font-weight:1100;font-size:13px;color:#111827}
+.kitsHelp{font-size:12px;color:var(--muted);font-weight:800}
+.kitsLabel{display:block;font-size:12px;color:var(--muted);font-weight:900;margin:8px 0 6px}
+.kitsPills{display:flex;flex-wrap:wrap;gap:8px}
+.kitsPillBtn{border:1px solid var(--line);background:var(--chip);border-radius:999px;padding:10px 12px;font-weight:1000;font-size:12px;cursor:pointer;color:#111827;display:inline-flex;gap:8px;align-items:center}
+.kitsPillBtn small{font-weight:1000;color:#334155}
+.kitsPillBtn.on{background:#111827;color:#fff;border-color:rgba(17,24,39,.25)}
+.kitsPillBtn.on small{color:rgba(255,255,255,.85)}
+.kitsSpacer{height:12px}
+.kitsRow2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.kitsRow2{grid-template-columns:1fr}}
+.kitsToggle{display:flex;gap:8px;background:#f6f7fb;border:1px solid var(--line);padding:6px;border-radius:12px;width:max-content}
+.kitsToggle button{border:0;border-radius:10px;padding:10px 12px;cursor:pointer;font-weight:1000;font-size:12px;background:transparent;color:#0f172a}
+.kitsToggle button.on{background:#fff;border:1px solid var(--line);box-shadow:0 10px 18px rgba(16,24,40,.08)}
+.kitsAutoLine{margin-top:0;padding:10px 12px;border:1px dashed #e5e7eb;border-radius:12px;background:#fafbfc;font-size:12px;color:#334155;font-weight:800}
+.kitsAutoLine b{font-weight:1100}
+.kitsAutoLine .ok{color:#16a34a;font-weight:1100}
+.kitsAutoLine .warn{color:#b45309;font-weight:1100}
+.kitsEmu{border:1px dashed #e5e7eb;border-radius:12px;background:#fafbfc;padding:10px 12px}
+.kitsCheck{display:flex;align-items:center;gap:10px;font-size:12px;color:#0f172a;font-weight:1000;margin:0}
+.kitsCheck input{transform:scale(1.1)}
+.kitsNote{margin-top:10px;font-size:12px;color:var(--muted);font-weight:800;line-height:1.35}
+.kitsSummary{position:sticky;top:76px}
+@media (max-width:980px){.kitsSummary{position:static}}
+.kitsSumTitle{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.kitsSumList{display:grid;gap:8px}
+.kitsLine{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;font-size:12px;color:#334155;padding:8px 10px;border:1px solid var(--line);border-radius:12px;background:#fafbfc;font-weight:900}
+.kitsLine .l{color:#475569;font-weight:900}
+.kitsLine .r{font-weight:1100;color:#0f172a;white-space:nowrap}
+.kitsTotal{margin-top:10px;padding:12px;border-radius:14px;background:linear-gradient(180deg,#0f172a,#0b1220);color:#fff;border:1px solid rgba(255,255,255,.10)}
+.kitsTotal .t1{font-size:12px;color:rgba(255,255,255,.75);font-weight:900}
+.kitsTotal .t2{font-size:22px;font-weight:1200;letter-spacing:.2px;margin-top:4px}

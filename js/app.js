@@ -39,10 +39,13 @@
   const loadCart = () => safeParse(localStorage.getItem(LS_CART) || "{}", {});
   const saveCart = (c) => localStorage.setItem(LS_CART, JSON.stringify(c || {}));
 
+  const isCustomCartId = (id) => String(id || "").startsWith("kit_") || String(id || "").startsWith("custom_");
+
   const sanitizeCartAgainstStock = () => {
     try {
       let changed = false;
       Object.keys(cart).forEach((id) => {
+        if (isCustomCartId(id)) return;
         const p = products.find(x => String(x.id) === String(id));
         if (!p || !inStock(p)) { delete cart[id]; changed = true; return; }
         // ensure updated price/name
@@ -96,6 +99,7 @@
     viewCatalogo.style.display = which === "catalogo" ? "block" : "none";
     viewPedidos.style.display = which === "pedidos" ? "block" : "none";
     viewKits.style.display = which === "kits" ? "block" : "none";
+    if (which === "kits") initKits();
   }
 
   // ===== CART =====
@@ -539,6 +543,258 @@ cart = {};
     // Recarga dura
     location.reload();
   }
+
+
+// ===== KITS DE INSTALACIÓN =====
+const KIT_BASE_PRICE = {
+  inyeccion: 550000,
+  carburado: 585000,
+  quinta_aeb: 670000,
+  quinta_axis: 570000,
+};
+
+const KIT_NAMES = {
+  inyeccion: "Inyección",
+  carburado: "Carburado",
+  quinta_aeb: "5ta AEB",
+  quinta_axis: "5ta AXIS",
+};
+
+const KITS_EXTRA_PRICES = {
+  valvula_extra_2do_cil: 65000,
+  diferencia_cuna_2cil: 40000, // CORRECCIÓN (no 90k)
+  emulador_4cil: 31000,        // SOLO inyección
+};
+
+const CYLINDERS = [
+  { id:"244-30-780",  label:"Ø244 · 30L · 780mm",  price:330000 },
+  { id:"244-60-1500", label:"Ø244 · 60L · 1500mm", price:535000 },
+
+  { id:"273-30-690",  label:"Ø273 · 30L · 690mm",  price:330000 },
+  { id:"273-40-880",  label:"Ø273 · 40L · 880mm",  price:350000 },
+  { id:"273-50-1070", label:"Ø273 · 50L · 1070mm", price:485000 },
+  { id:"273-60-1250", label:"Ø273 · 60L · 1250mm", price:535000 },
+
+  { id:"323-58-900",  label:"Ø323 · 58L · 900mm",  price:550000 },
+
+  { id:"340-58-850",  label:"Ø340 · 58L · 850mm",  price:550000 },
+  { id:"340-64-930",  label:"Ø340 · 64L · 930mm",  price:598000 },
+
+  { id:"355-65-855",  label:"Ø355 · 65L · 855mm",  price:610000 },
+  { id:"355-70-910",  label:"Ø355 · 70L · 910mm",  price:650000 },
+  { id:"355-80-1020", label:"Ø355 · 80L · 1020mm", price:755000 },
+
+  { id:"406-90-960",   label:"Ø406 · 90L · 960mm",   price:1000000 },
+  { id:"406-120-1170", label:"Ø406 · 120L · 1170mm", price:1228000 },
+];
+
+const kitState = {
+  kit: null,
+  cylindersCount: 1,
+  cyl1: CYLINDERS[0]?.id || "",
+  cyl2: CYLINDERS[0]?.id || "",
+};
+
+const getCyl = (id) => CYLINDERS.find(c => c.id === id) || null;
+
+function fillCylSelect(sel){
+  if (!sel) return;
+  sel.innerHTML = "";
+  for (const c of CYLINDERS){
+    const opt = document.createElement("option");
+    opt.value = c.id;
+    opt.textContent = `${c.label} (${fmtMoney(c.price)})`;
+    sel.appendChild(opt);
+  }
+}
+
+function setKitsStatus(text, mode){
+  const dot = document.getElementById("kitStatusDot");
+  const txt = document.getElementById("kitStatusTxt");
+  if (txt) txt.textContent = text || "Pendiente";
+  if (dot){
+    dot.classList.remove("on","warn");
+    if (mode === "ok") dot.classList.add("on");
+    else dot.classList.add("warn");
+  }
+}
+
+function isInyeccionSelected(){
+  return kitState.kit === "inyeccion";
+}
+
+function syncEmuladorVisibility(){
+  const emuRow = document.getElementById("emuRow");
+  const chkEmu = document.getElementById("kitEmulador4");
+  const ok = isInyeccionSelected();
+
+  if (emuRow) emuRow.style.display = ok ? "" : "none";
+  if (chkEmu){
+    chkEmu.disabled = !ok;
+    if (!ok) chkEmu.checked = false;
+  }
+}
+
+function getEmuladorCost(){
+  const chkEmu = document.getElementById("kitEmulador4");
+  return (isInyeccionSelected() && chkEmu && chkEmu.checked) ? KITS_EXTRA_PRICES.emulador_4cil : 0;
+}
+
+function setActiveKitButton(){
+  document.querySelectorAll("#kitPills .kitsPillBtn").forEach(btn=>{
+    btn.classList.toggle("on", btn.dataset.kit === kitState.kit);
+  });
+}
+
+function setToggle(n){
+  kitState.cylindersCount = n;
+  document.querySelectorAll("#cylToggle button").forEach(b=>{
+    b.classList.toggle("on", Number(b.dataset.n) === n);
+  });
+
+  const wrap = document.getElementById("cyl2Wrap");
+  if (wrap) wrap.style.display = (n === 2) ? "" : "none";
+
+  const auto = document.getElementById("autoRules");
+  if (auto){
+    if (n === 2){
+      auto.innerHTML = `<b>2 cilindros:</b> +1 válvula (${fmtMoney(KITS_EXTRA_PRICES.valvula_extra_2do_cil)}) y diferencia de cuna (${fmtMoney(KITS_EXTRA_PRICES.diferencia_cuna_2cil)}). <span class="warn">AUTO</span>`;
+    } else {
+      auto.innerHTML = `<b>1 cilindro:</b> sin válvula extra. Cuna normal. <span class="ok">OK</span>`;
+    }
+  }
+
+  renderKitsResumen();
+}
+
+function computeKits(){
+  const base = kitState.kit ? (KIT_BASE_PRICE[kitState.kit] || 0) : 0;
+  const c1 = getCyl(kitState.cyl1);
+  const c2 = getCyl(kitState.cyl2);
+
+  let cylCost = 0;
+  if (c1) cylCost += c1.price;
+  if (kitState.cylindersCount === 2 && c2) cylCost += c2.price;
+
+  let extra = 0;
+  if (kitState.cylindersCount === 2){
+    extra += KITS_EXTRA_PRICES.valvula_extra_2do_cil;
+    extra += KITS_EXTRA_PRICES.diferencia_cuna_2cil;
+  }
+  extra += getEmuladorCost();
+
+  const total = base + cylCost + extra;
+  return { base, cylCost, extra, total, c1, c2 };
+}
+
+function renderKitsResumen(){
+  const { base, cylCost, extra, total } = computeKits();
+
+  const sumKit = document.getElementById("sumKit");
+  const sumBase = document.getElementById("sumBase");
+  const sumCyl = document.getElementById("sumCyl");
+  const sumExtra = document.getElementById("sumExtra");
+  const sumTotal = document.getElementById("sumTotal");
+  const sumBadge = document.getElementById("sumBadge");
+  const hint = document.getElementById("kitStatusHint");
+  const btnAdd = document.getElementById("btnAddKit");
+
+  if (!kitState.kit){
+    if (sumKit) sumKit.textContent = "—";
+    if (sumBadge) sumBadge.textContent = "—";
+    if (hint) hint.textContent = "Seleccioná un kit para comenzar.";
+    setKitsStatus("Pendiente", "warn");
+    if (btnAdd) btnAdd.disabled = true;
+  } else {
+    if (sumKit) sumKit.textContent = KIT_NAMES[kitState.kit] || kitState.kit;
+    if (sumBadge) sumBadge.textContent = kitState.cylindersCount === 2 ? "2 cilindros" : "1 cilindro";
+    if (hint) hint.textContent = "Listo para agregar al pedido.";
+    setKitsStatus("Listo", "ok");
+    if (btnAdd) btnAdd.disabled = false;
+  }
+
+  if (sumBase) sumBase.textContent = fmtMoney(base);
+  if (sumCyl) sumCyl.textContent = fmtMoney(cylCost);
+  if (sumExtra) sumExtra.textContent = fmtMoney(extra);
+  if (sumTotal) sumTotal.textContent = fmtMoney(total);
+
+  syncEmuladorVisibility();
+}
+
+function kitsAddToCart(){
+  if (!kitState.kit) return;
+
+  const { base, c1, c2 } = computeKits();
+  // IDs custom: no se sanitizan por stock
+  const addCustom = (id, name, price, qty=1, code="KIT") => {
+    const pid = String(id);
+    const p = { id: pid, code, name, price: Number(price) || 0 };
+    addToCart(p, qty); // usa el mismo carrito
+  };
+
+  // Kit base
+  addCustom(`kit_base_${kitState.kit}`, `KIT ${KIT_NAMES[kitState.kit] || kitState.kit}`, base, 1, "KIT");
+
+  // Cilindros
+  if (c1) addCustom(`kit_cyl_${c1.id}`, `Cilindro ${c1.label}`, c1.price, 1, "CIL");
+  if (kitState.cylindersCount === 2 && c2) addCustom(`kit_cyl_${c2.id}`, `Cilindro ${c2.label}`, c2.price, 1, "CIL");
+
+  // Extras automáticos 2 cil
+  if (kitState.cylindersCount === 2){
+    addCustom(`kit_extra_valvula`, `Extra: Válvula (2º cilindro)`, KITS_EXTRA_PRICES.valvula_extra_2do_cil, 1, "EXT");
+    addCustom(`kit_extra_cuna`, `Extra: Diferencia de cuna (2 cil)`, KITS_EXTRA_PRICES.diferencia_cuna_2cil, 1, "EXT");
+  }
+
+  // Emulador (solo inyección)
+  if (getEmuladorCost() > 0){
+    addCustom(`kit_extra_emulador`, `Adicional: Emulador 4 cilindros`, KITS_EXTRA_PRICES.emulador_4cil, 1, "EXT");
+  }
+
+  openCart();
+}
+
+let kitsBound = false;
+function initKits(){
+  if (kitsBound) return;
+  const pills = document.getElementById("kitPills");
+  const sel1 = document.getElementById("cyl1");
+  const sel2 = document.getElementById("cyl2");
+  const btnAdd = document.getElementById("btnAddKit");
+  const toggle = document.getElementById("cylToggle");
+  const chkEmu = document.getElementById("kitEmulador4");
+
+  fillCylSelect(sel1);
+  fillCylSelect(sel2);
+  if (sel1) sel1.value = kitState.cyl1;
+  if (sel2) sel2.value = kitState.cyl2;
+
+  pills?.addEventListener("click", (e)=>{
+    const btn = e.target?.closest?.("button[data-kit]");
+    if (!btn) return;
+    kitState.kit = btn.dataset.kit;
+    setActiveKitButton();
+    renderKitsResumen();
+  });
+
+  toggle?.addEventListener("click", (e)=>{
+    const b = e.target?.closest?.("button[data-n]");
+    if (!b) return;
+    setToggle(Number(b.dataset.n) || 1);
+  });
+
+  sel1?.addEventListener("change", ()=>{ kitState.cyl1 = sel1.value; renderKitsResumen(); });
+  sel2?.addEventListener("change", ()=>{ kitState.cyl2 = sel2.value; renderKitsResumen(); });
+  chkEmu?.addEventListener("change", ()=>{ renderKitsResumen(); });
+
+  btnAdd?.addEventListener("click", kitsAddToCart);
+
+  // defaults
+  setToggle(1);
+  setActiveKitButton();
+  renderKitsResumen();
+
+  kitsBound = true;
+}
 
   function bindEvents() {
     document.getElementById("btnCart")?.addEventListener("click", openCart);

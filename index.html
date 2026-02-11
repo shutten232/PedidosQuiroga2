@@ -136,9 +136,110 @@
       </section>
 
       <section class="contentCard" id="viewKits" style="display:none">
-        <div class="contentHd"><div><div class="title">Kits de Instalación</div><div class="mini">Pendiente</div></div></div>
-        <div class="empty">Se arma después. Primero catálogo + pedido.</div>
-      </section>
+  <div class="contentHd">
+    <div>
+      <div class="title">Kits de Instalación</div>
+      <div class="mini">Cotizador simple: elegís equipo + cilindro(s). Extras automáticos.</div>
+    </div>
+    <div class="right">
+      <span class="statusPill" title="Estado">
+        <span class="statusDot warn" id="kitStatusDot"></span>
+        <span id="kitStatusTxt">Pendiente</span>
+      </span>
+      <span class="mini" id="kitStatusHint">Seleccioná un kit para comenzar.</span>
+    </div>
+  </div>
+
+  <div class="kitsBody">
+    <div class="kitsGrid">
+      <div class="kitsBox">
+        <div class="kitsBoxTitle">
+          <div>
+            <div class="kitsBoxH">Configuración</div>
+            <div class="kitsHelp">2 clics + 1 cilindro</div>
+          </div>
+        </div>
+
+        <label class="kitsLabel">1) Tipo de equipo</label>
+        <div class="kitsPills" id="kitPills">
+          <button class="kitsPillBtn" type="button" data-kit="inyeccion"><span>Inyección</span> <small>$550.000</small></button>
+          <button class="kitsPillBtn" type="button" data-kit="carburado"><span>Carburado</span> <small>$585.000</small></button>
+          <button class="kitsPillBtn" type="button" data-kit="quinta_aeb"><span>5ta AEB</span> <small>$670.000</small></button>
+          <button class="kitsPillBtn" type="button" data-kit="quinta_axis"><span>5ta AXIS</span> <small>$570.000</small></button>
+        </div>
+
+        <div class="kitsSpacer"></div>
+
+        <div class="kitsRow2">
+          <div>
+            <label class="kitsLabel">2) Cantidad de cilindros</label>
+            <div class="kitsToggle" id="cylToggle">
+              <button type="button" data-n="1" class="on">1 cilindro</button>
+              <button type="button" data-n="2">2 cilindros</button>
+            </div>
+          </div>
+          <div>
+            <label class="kitsLabel">Reglas automáticas</label>
+            <div class="kitsAutoLine" id="autoRules">
+              <b>1 cilindro:</b> sin válvula extra. Cuna normal. <span class="ok">OK</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kitsSpacer"></div>
+
+        <div class="kitsRow2">
+          <div>
+            <label class="kitsLabel">3) Cilindro 1</label>
+            <select class="select" id="cyl1"></select>
+          </div>
+          <div id="cyl2Wrap" style="display:none">
+            <label class="kitsLabel">4) Cilindro 2</label>
+            <select class="select" id="cyl2"></select>
+          </div>
+        </div>
+
+        <div class="kitsSpacer"></div>
+
+        <div class="kitsEmu" id="emuRow" style="display:none">
+          <label class="kitsCheck">
+            <input type="checkbox" id="kitEmulador4" />
+            <span>Adicional: Emulador 4 cil (+$31.000)</span>
+          </label>
+          <div class="kitsHelp">Solo para kit Inyección.</div>
+        </div>
+
+        <div class="kitsNote">
+          Agrega el kit al carrito real. Si elegís <b>2 cilindros</b>: +1 válvula (<b>$65.000</b>) y diferencia de cuna (<b>$40.000</b>) automáticamente.
+        </div>
+      </div>
+
+      <aside class="kitsSummary">
+        <div class="kitsSumTitle">
+          <div class="kitsBoxH">Resumen</div>
+          <div class="kitsHelp" id="sumBadge">—</div>
+        </div>
+
+        <div class="kitsSumList">
+          <div class="kitsLine"><div class="l">Equipo</div><div class="r" id="sumKit">—</div></div>
+          <div class="kitsLine"><div class="l">Base</div><div class="r" id="sumBase">$0</div></div>
+          <div class="kitsLine"><div class="l">Cilindros</div><div class="r" id="sumCyl">$0</div></div>
+          <div class="kitsLine"><div class="l">Extras</div><div class="r" id="sumExtra">$0</div></div>
+        </div>
+
+        <div class="kitsTotal">
+          <div class="t1">Total estimado</div>
+          <div class="t2" id="sumTotal">$0</div>
+        </div>
+
+        <button class="btn primary" id="btnAddKit" style="width:100%;margin-top:10px" disabled>Agregar kit al pedido</button>
+        <div class="muted" style="margin-top:8px;line-height:1.35">
+          Se agrega como ítems al carrito (kit base + cilindros + extras).
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
     </main>
   </div>
 
